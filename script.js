@@ -1,6 +1,6 @@
-let t1 = Math.random() * 3; // in seconds
-let t2 = Math.random() * 3;
-let t3 = Math.random() * 3;
+let t1 = 1 + Math.random() * 2;
+let t2 = 1 + Math.random() * 2;
+let t3 = 1 + Math.random() * 2;
 
 let promise1 = new Promise((resolve) => {
   setTimeout(() => {
@@ -20,11 +20,8 @@ let promise3 = new Promise((resolve) => {
   }, t3 * 1000);
 });
 
-let start = performance.now();
-Promise.all([promise1, promise2, promise3]).then((res) => {
-  let end = performance.now();
-  let total = (end - start) / 1000; // convert ms to seconds
-
+Promise.all([promise1, promise2, promise3]).then(() => {
+  const total = Math.max(t1, t2, t3);
   const output = document.getElementById("output");
   output.innerHTML = `
     <tr>
@@ -42,5 +39,6 @@ Promise.all([promise1, promise2, promise3]).then((res) => {
     <tr>
       <td>Total</td>
       <td>${total.toFixed(3)}</td>
-    </tr>`;
+    </tr>
+  `;
 });
